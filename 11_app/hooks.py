@@ -26,7 +26,10 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {
+  "Purchase Order" : "public/js/purchase_order.js",
+  "Material Request" : "public/js/stock_entry.js"            
+}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -94,7 +97,8 @@ fixtures = [
             'name', 'in',[
                "Item-item_type" ,
                "Item-item_shelf",
-               "Item-volume"
+               "Item-volume",
+               "Item-generic_name"
             ]]
         ]
     },
@@ -107,7 +111,10 @@ fixtures = [
                   "Item-valuation_rate-hidden",
                   "Item-opening_stock-hidden",
                   "Item-valuation_method-hidden",
-                  "Item-supplier_details-collapsible"
+                  "Item-supplier_details-collapsible",
+                  "Item-naming_series-default",
+                  "Item-naming_series-options",
+                  "Item-section_break_11-hidden"
                   # "Item-default_material_request_type-hidden",
                   # "Item-hub_publishing_sb-hidden",
                   # "Item-website_section-hidden",

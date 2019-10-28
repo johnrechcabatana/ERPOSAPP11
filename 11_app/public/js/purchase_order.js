@@ -1,8 +1,24 @@
-cur_frm.cscript.supplier=function(frm)
+cur_frm.cscript.supplier=function(doc, cdt, cdn)
 {
-   me.frm.set_query("item_code","items", function(doc, cdt, cdn){
+   me.frm.set_query("item_code","items", function(frm){
             return {
                 query: "11_app.script.purchase_order.filteritem"
             };
     });
+}
+
+cur_frm.cscript.item_code=function(doc, cdt, cdn)
+{	var values= locals[cdt][cdn];
+	frappe.call({
+		method:"11_app.script.stock_entry.getitems",
+		args:{"item_code":values.item_code},
+		callback:function(r)
+		{
+			console.log(r.message);
+		    frappe.model.set_value(cdt, cdn, "item_name", r.message[0].item_name);
+		    frappe.model.set_value(cdt, cdn, "volume", r.message[0].volume);
+		    frappe.model.set_value(cdt, cdn, "item_type", r.message[0].item_type);
+		    frappe.model.set_value(cdt, cdn, "item_group", r.message[0].item_group);
+		}
+	});
 }

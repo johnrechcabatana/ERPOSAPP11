@@ -98,7 +98,10 @@ fixtures = [
                "Item-item_type" ,
                "Item-item_shelf",
                "Item-volume",
-               "Item-generic_name"
+               "Item-generic_name",
+               "Purchase Order Item-volume",
+               "Purchase Order Item-item_type",
+               "Purchase Order Item-volume"
             ]]
         ]
     },
@@ -114,7 +117,12 @@ fixtures = [
                   "Item-supplier_details-collapsible",
                   "Item-naming_series-default",
                   "Item-naming_series-options",
-                  "Item-section_break_11-hidden"
+                  "Item-section_break_11-hidden",
+                  "Purchase Order Item-item_name-in_list_view",
+                  "Purchase Order Item-item_group-columns",
+                  "Purchase Order Item-description-hidden",
+                  "Purchase Order Item-rate-columns",
+                  "Purchase Order Item-description-default"
                   # "Item-default_material_request_type-hidden",
                   # "Item-hub_publishing_sb-hidden",
                   # "Item-website_section-hidden",

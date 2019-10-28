@@ -1,0 +1,31 @@
+nav.navbar.navbar-default.navbar-main {
+    display: none;
+}
+.form-footer {
+    display: none!Important;
+}
+.hero-and-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #4B4C9D!important;
+}
+
+footer.web-footer {
+    display: none;
+} 
+.form-signin .form-control { 
+    height: 45px!important; 
+    font-size: 16px!important;
+    margin-bottom: 10px;
+    border-radius: 0px!important;
+}
+.login-content .btn {
+    font-size: 18px;
+    padding: 15px 15px;
+    margin-top: 45px;
+    text-transform: uppercase;
+    font-weight: bold;
+}

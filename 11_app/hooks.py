@@ -124,7 +124,8 @@ fixtures = [
                   "Purchase Order Item-rate-columns",
                   "Purchase Order Item-description-default",
                   "Purchase Order Item-qty-bold",
-                  "Purchase Order Item-qty-columns"
+                  "Purchase Order Item-qty-in_list_view",
+                  "Purchase Order Item-amount-columns"
                   # "Item-default_material_request_type-hidden",
                   # "Item-hub_publishing_sb-hidden",
                   # "Item-website_section-hidden",

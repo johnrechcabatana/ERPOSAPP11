@@ -250,7 +250,7 @@
   "doctype": "Property Setter",
   "doctype_or_field": "DocField",
   "field_name": "qty",
-  "modified": "2019-10-28 17:41:33.724333",
+  "modified": "2019-10-28 21:44:32.858888",
   "name": "Purchase Order Item-qty-bold",
   "parent": null,
   "parentfield": null,
@@ -270,13 +270,13 @@
   "doctype": "Property Setter",
   "doctype_or_field": "DocField",
   "field_name": "qty",
-  "modified": "2019-10-28 17:42:56.410492",
-  "name": "Purchase Order Item-qty-columns",
+  "modified": "2019-10-28 22:15:33.115802",
+  "name": "Purchase Order Item-qty-in_list_view",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "property": "columns",
-  "property_type": "Int",
-  "value": "2"
+  "property": "in_list_view",
+  "property_type": "Check",
+  "value": "1"
  }
 ]

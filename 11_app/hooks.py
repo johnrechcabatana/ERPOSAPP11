@@ -14,16 +14,20 @@ app_license = "MIT"
 # Includes in <head>
 # ------------------
 
-# include js, css files in header of desk.html
-# app_include_css = "/assets/11_app/css/11_app.css"
+# include js, css files in header of desk.html 
+app_include_css = "/assets/11_app/css/ephdesk.css"
 # app_include_js = "/assets/11_app/js/11_app.js"
+
+# include js, css files in header of web template
+web_include_css = "/assets/11_app/css/ephstyle.css"
+# web_include_js = "/assets/11_app/js/11_app.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/11_app/css/11_app.css"
 # web_include_js = "/assets/11_app/js/11_app.js"
 
 # include js in page
-# page_js = {"page" : "public/js/file.js"}
+page_js = {"pos":"public/js/pos.js"}
 
 # include js in doctype views
 doctype_js = {

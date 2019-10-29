@@ -7,4 +7,5 @@ def filt_itemby_supplier(doctype, txt, searchfield, start, page_len, filters):
 
 @frappe.whitelist()
 def filteritem(doctype, txt, searchfield, start, page_len, filters):
-    return frappe.db.sql("""select item_code, item_name, item_group, volume, item_type,stock_uom from `tabItem`"""); 
+    return frappe.db.sql("""select `tabItem`.item_code, `tabItem`.item_name, `tabItem`.item_group, `tabItem`.volume, `tabItem`.item_type,`tabItem`.stock_uom, `tabItem Price`.price_list 
+    	FROM `tabItem` inner join `tabItem Price` """); 

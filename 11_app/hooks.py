@@ -31,7 +31,8 @@ page_js = {"pos":"public/js/pos.js"}
 
 # include js in doctype views
 doctype_js = {
-  "Purchase Order" : "public/js/purchase_order.js",
+  "Purchase Order" : "public/js/transaction_order.js",
+  "Sales Order" : "public/js/transaction_order.js",
   "Material Request" : "public/js/stock_entry.js"            
 }
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}

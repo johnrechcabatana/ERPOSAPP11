@@ -1,11 +1,3 @@
-// cur_frm.cscript.supplier=function(doc, cdt, cdn)
-// {
-//    me.frm.set_query("item_code","items", function(frm){
-//             return {
-//                 query: "11_app.script.purchase_order.filteritem"
-//             };
-//     });
-// }
 
 cur_frm.cscript.item_code=function(doc, cdt, cdn)
 {	var values= locals[cdt][cdn];

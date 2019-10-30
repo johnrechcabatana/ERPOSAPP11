@@ -8,8 +8,9 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 		{
 			console.log(r.message);
 		    frappe.model.set_value(cdt, cdn, "volume", r.message[0].item_name+","+ r.message[0].volume+","+r.message[0].item_type);
-		    // frappe.model.set_value(cdt, cdn, "item_type", r.message[0].item_type);
-		    frappe.model.set_value(cdt, cdn, "item_name", r.message[0].item_group);
+		    frappe.model.set_value(cdt, cdn, "description", "sales");
+		    frappe.model.set_value(cdt, cdn, "item_name", r.message[0].brand_name);
+		    frappe.model.set_value(cdt, cdn, "uom", r.message[0].stock_uom);
 		}
 	});
 
@@ -25,4 +26,12 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 			}
 		}
 	});
+}
+cur_frm.cscript.customer=function(frm)
+{
+   me.frm.set_query("item_code","items", function(doc, cdt, cdn){
+            return {
+                query: "11_app.script.item.getitems"
+            };
+    });
 }

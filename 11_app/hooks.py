@@ -109,7 +109,8 @@ fixtures = [
                "Purchase Order Item-volume",
                "Sales Order Item-volume",
                "Sales Order Item-item_type",
-               "Sales Order Item-batch_expiry"
+               "Sales Order Item-batch_expiry",
+               "Item-brand_name"
             ]]
         ]
     },
@@ -137,7 +138,8 @@ fixtures = [
                   "Sales Order Item-item_code-columns",
                   "Sales Order Item-item_name-in_list_view",
                   "Sales Order Item-item_name-columns",
-                  "Sales Order Item-rate-columns"
+                  "Sales Order Item-rate-columns",
+                  "Purchase Order Item-uom-in_list_view"
                   # "Item-default_material_request_type-hidden",
                   # "Item-hub_publishing_sb-hidden",
                   # "Item-website_section-hidden",

@@ -2,7 +2,7 @@ cur_frm.cscript.material_request_type=function(frm)
 {
    me.frm.set_query("item_code","items", function(doc, cdt, cdn){
             return {
-                query: "11_app.script.purchase_order.filteritem"
+                query: "11_app.script.item.getitems"
             };
     });
 }

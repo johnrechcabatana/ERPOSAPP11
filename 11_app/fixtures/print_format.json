@@ -1,0 +1,26 @@
+[
+ {
+  "align_labels_right": 0,
+  "css": null,
+  "custom_format": 1,
+  "default_print_language": null,
+  "disabled": 0,
+  "doc_type": "Sales Order",
+  "docstatus": 0,
+  "doctype": "Print Format",
+  "font": "Default",
+  "format_data": null,
+  "html": "<br/>\n<br/><div style=\"margin-left:380px\">{{ doc.delivery_date }}</div>\n<div class=\"row\" style=\"margin-left:70px\">\n\t<table>\n\t\t<tr>\n\t\t\t<td style=\"width:405px\">{{ doc.customer_name }}<br>{{ doc.name}}\n\t\t\t</td>\n\t\t\t<td >{{ doc.address_display }}\n\t\t\t</td>\n\t\t</tr>\n\t</table>\n</div>\n<br>\n<br>\n<br>\n<br>\n<div class=\"row\">\n</div>\n<table>\n\t<tbody text-align=\"right\">\n\t\t{%- for row in doc.items -%}\n\t\t<tr>\n\t\t\t<td style=\"width:50px\">{{ row.qty }}</td>\n\t\t\t<td style=\"width:60px\"> {{ row.uom or row.stock_uom }}</td>\n\t\t\t<td style=\"width:395px\">\n\t\t\t\t{{row.volume}}<br>{{row.item_name}},{{row.item_type}},{{row.batch_expiry}}\n\t\t\t</td>\n\t\t\t<td style=\"\">\n\t\t\t\t<div style=\"\">{{ row.get_formatted(\"rate\", doc)}}</div></td>\n\t\t\t<td style=\"width:100px\"></td>\n\t\t\t<td style=\"\">{{\n\t\t\t\trow.get_formatted(\"amount\", doc) }}</td>\n\t\t</tr>\n\t\t{%- endfor -%}\n\t</tbody>\n</table>\n<div style=\"margin-top:550px\">\n\t<div style=\"margin-left:660px\">\tP{{doc.grand_total}}\n</div>",
+  "line_breaks": 0,
+  "modified": "2019-10-30 22:45:21.309500",
+  "module": "Selling",
+  "name": "Sales Invoice EPH",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "print_format_builder": 1,
+  "print_format_type": "Js",
+  "show_section_headings": 0,
+  "standard": "Yes"
+ }
+]

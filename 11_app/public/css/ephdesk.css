@@ -1,3 +1,12 @@
+ 
+
+a.navbar-brand.navbar-home.hidden-xs.hidden-sm:after {content: " Eagles Pharma Health";padding: 15px 10px;line-height: 32px;font-size: 24px;}
+#navbar-breadcrumbs > li > a { 
+    line-height: 34px;
+}
+.erpnext-icon {
+    width: 50px!important; 
+}
 
 .form-group-sm .form-control {
     height: 45px!important;
@@ -26,6 +35,11 @@
     font-size: 14px; 
 }
 button.btn.btn-default.list-customers-btn.view_customer {
+    height: 45px;
+    margin-left: 5px!Important;
+    width: 45px;
+}
+button.btn.btn-default.list-customers-btn {
     height: 45px;
     margin-left: 5px!Important;
     width: 45px;
@@ -92,4 +106,31 @@ body[data-route="pos"] .pos-bill-header {
 		width: 100%;
 	}
 
+}
+@media (max-width: 767px){
+    a.navbar-brand.navbar-home.hidden-xs.hidden-sm:after {
+         display: none;
+    } 
+    .erpnext-icon {
+        width: 50px;
+        margin-right: 0px;
+        margin-top: -3px;
+    }
+
+    #icon-grid {
+        max-width: 100%;
+        padding-top: 40px;
+    }
+    .case-wrapper {
+        width: 160px;
+        height: 120px;
+    }
+    .app-icon {
+        padding: 16px;
+        border-radius: 12px;
+    }
+    .app-icon i {
+        font-size: 45px;
+        min-width: 43px;
+    }
 }

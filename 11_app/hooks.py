@@ -163,6 +163,15 @@ fixtures = [
                   # "Item-weight_per_unit-hidden"
                 ]]
           ]
+      },
+      {
+        "doctype":"Print Format",
+        "filters":[
+            [
+                'name','in',[
+                  "Sales Invoice EPH"
+                ]]
+          ]
       }
 ];
 

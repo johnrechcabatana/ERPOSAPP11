@@ -7,9 +7,15 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 		callback:function(r)
 		{
 			console.log(r.message);
-		    frappe.model.set_value(cdt, cdn, "volume", r.message[0].item_name+","+ r.message[0].volume+","+r.message[0].item_type);
+			var checkbrand;
+			if(r.message[0].brand_name != null)
+			{
+				checkbrand = r.message[0].brand_name;
+			}
+			else{checkbrand = "none" }
+		    frappe.model.set_value(cdt, cdn, "volume","GN: "+r.message[0].item_name+",vl: "+ r.message[0].volume+",type:"+r.message[0].item_type+",group: "+r.message[0].item_group);
 		    frappe.model.set_value(cdt, cdn, "description", "sales");
-		    frappe.model.set_value(cdt, cdn, "item_name", r.message[0].brand_name);
+		    frappe.model.set_value(cdt, cdn, "item_name", checkbrand);
 		    frappe.model.set_value(cdt, cdn, "uom", r.message[0].stock_uom);
 		}
 	});

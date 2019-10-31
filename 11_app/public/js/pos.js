@@ -404,7 +404,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.set_transaction_defaults("Customer");
 		this.frm.doc["allow_user_to_edit_rate"] = this.pos_profile_data["allow_user_to_edit_rate"] ? true : false;
 		this.frm.doc["allow_user_to_edit_discount"] = this.pos_profile_data["allow_user_to_edit_discount"] ? true : false;
-		this.wrapper.html(frappe.render_template("pos", this.frm.doc));
+		this.wrapper.html(frappe.render_template("pos_custom", this.frm.doc));
 		this.make_search();
 		this.make_customer();
 		this.make_list_customers();
@@ -1061,12 +1061,12 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 					item_price = format_currency(me.price_list_data[obj.name], me.frm.doc.currency);
 				}
 				if(index < me.page_len) {
-					$(frappe.render_template("pos_item", {
+					$(frappe.render_template("pos_custom_item", {
 						item_code: obj.name,
 						item_price: item_price,
 						item_name: obj.name === obj.item_name ? "" : obj.item_name,
 						item_image: obj.image,
-						item_stock: __('Stock Qty') + ": " + me.get_actual_qty(obj),
+						item_stock: me.get_actual_qty(obj),
 						item_uom: obj.stock_uom,
 						color: frappe.get_palette(obj.item_name),
 						abbr: frappe.get_abbr(obj.item_name)

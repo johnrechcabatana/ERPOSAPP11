@@ -1050,7 +1050,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 
 		var $wrap = me.wrapper.find(".item-list");
 		me.wrapper.find(".item-list").empty();
-
+		console.log(this.items);
 		if (this.items.length > 0) {
 			$.each(this.items, function(index, obj) {
 				let customer_price_list = me.customer_wise_price_list[customer];
@@ -1173,11 +1173,14 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 	bind_qty_event: function () {
 		var me = this;
 
+ 
+
 		$(this.wrapper).on("change", ".pos-item-qty", function () {
 			var item_code = $(this).parents(".pos-selected-item-action").attr("data-item-code");
 			var qty = $(this).val();
 			me.update_qty(item_code, qty);
 			me.update_value();
+			console.log($(this).val());
 		})
 
 		$(this.wrapper).on("focusout", ".pos-item-qty", function () {
@@ -1390,13 +1393,49 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		var no_of_items = me.wrapper.find(".pos-bill-item").length;
 
 		this.customer_validate();
-		this.mandatory_batch_no();
-		this.validate_serial_no();
-		this.validate_warehouse();
+			//this.mandatory_batch_no(); 
+
+
+	
+			this.validate_serial_no();
+			this.validate_warehouse();
+			 let dialog = new frappe.ui.Dialog({
+	    	title: __("Quantity"),
+	    	fields: [
+	    		{
+	    			"fieldtype": "HTML",
+	    			"label": __("Quantity"),
+	    			"fieldname": "qty"
+	    		}
+	    	]
+	    });
+
+
+	   var qtys = '<div class="pos-selected-item-action modaqty" data-item-code="'+me.items[0].item_code+'" data-idx="1">'
+					+'<div class="pos-list-row">' 
+						+'<input type="tel" class="form-control cell inputmodalqty" value="1"/>'
+					+'</div>' 
+				+'</div>';	 
+	    dialog.set_primary_action(__("Enter"), () => { 
+	    	 var qtym =$('.inputmodalqty');
+				var item_code = qtym.parents(".modaqty").attr("data-item-code"); 
+				me.update_qty(item_code, qtym.val());
+				me.update_value();
+			dialog.hide();
+	    });
+	    // here you can append your custom template in dialog HTML field
+
+	 
+
+	    dialog.fields_dict.qty.$wrapper.html(qtys)
+        dialog.show();
+        this.update_value();
+        var item_code = me.items[0].name
 
 		if (no_of_items != 0) {
 			$.each(this.frm.doc["items"] || [], function (i, d) {
 				if (d.item_code == me.items[0].item_code) {
+
 					caught = true;
 					d.qty += 1;
 					d.amount = flt(d.rate) * flt(d.qty);

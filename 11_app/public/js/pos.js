@@ -285,6 +285,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			freeze: true,
 			freeze_message: __("Master data syncing, it might take some time"),
 			callback: function (r) {
+				console.log(r.message);
 				localStorage.setItem('doc', JSON.stringify(r.message.doc));
 				me.init_master_data(r)
 				me.set_interval_for_si_sync();
@@ -306,7 +307,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.item_data = r.message.items;
 		this.item_groups = r.message.item_groups;
 		this.customers = r.message.customers;
-		this.serial_no_data = r.message.serial_no_data;
+		this.serial_no_data = r.message.brand_name;
 		this.batch_no_data = r.message.batch_no_data;
 		this.barcode_data = r.message.barcode_data;
 		this.tax_data = r.message.tax_data;
@@ -1063,6 +1064,9 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				if(index < me.page_len) {
 					$(frappe.render_template("pos_custom_item", {
 						item_code: obj.name,
+						item_brand_name: obj.brand_name,
+						item_shelf: obj.item_shelf,
+						item_volume: obj.volume,
 						item_price: item_price,
 						item_name: obj.name === obj.item_name ? "" : obj.item_name,
 						item_image: obj.image,
@@ -1092,7 +1096,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		if (this.items.length == 1
 			&& this.search_item.$input.val()) {
 			this.search_item.$input.val("");
-			this.add_to_cart();
+			// this.add_to_cart();
 		}
 	},
 
@@ -1229,7 +1233,13 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			if($(me.pos_bill).is(":hidden")) return;
 
 			if (me.frm.doc.docstatus == 0) {
-				me.items = me.get_items($(this).attr("data-item-code"))
+				me.items = me.get_items($(this).attr("data-item-code"));
+				var TotalQty = $(this).attr("data-total-qty");
+				if(TotalQty <= 0)
+				{
+					frappe.throw("Product item is insufficient. Please contact si sir,");
+					return false;
+				}
 				me.add_to_cart();
 				me.clear_selected_row();
 			}
@@ -1386,20 +1396,14 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			frappe.throw(__("Please select customer"))
 		}
 	},
-
-	add_to_cart: function () {
-		var me = this;
-		var caught = false;
-		var no_of_items = me.wrapper.find(".pos-bill-item").length;
-
-		this.customer_validate();
-			//this.mandatory_batch_no(); 
+	qty_modal:function(item_codes){
+		 var me = this;
 
 
-	
-			this.validate_serial_no();
-			this.validate_warehouse();
-			 let dialog = new frappe.ui.Dialog({
+		var result_table = $(frappe.render_template('qty_custom', {
+			item_code: item_codes
+		}));
+		 let dialog = new frappe.ui.Dialog({
 	    	title: __("Quantity"),
 	    	fields: [
 	    		{
@@ -1409,28 +1413,33 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 	    		}
 	    	]
 	    });
-
-
-	   var qtys = '<div class="pos-selected-item-action modaqty" data-item-code="'+me.items[0].item_code+'" data-idx="1">'
-					+'<div class="pos-list-row">' 
-						+'<input type="tel" class="form-control cell inputmodalqty" value="1"/>'
-					+'</div>' 
-				+'</div>';	 
+ 
 	    dialog.set_primary_action(__("Enter"), () => { 
-	    	 var qtym =$('.inputmodalqty');
-				var item_code = qtym.parents(".modaqty").attr("data-item-code"); 
+	    	var	qtym =$('.inputmodalqty');
+	    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code");
+		        console.log(item_code+','+qtym.val());
 				me.update_qty(item_code, qtym.val());
 				me.update_value();
+				$('.modaqty').empty();
 			dialog.hide();
 	    });
-	    // here you can append your custom template in dialog HTML field
+ 
+	    dialog.fields_dict.qty.$wrapper.html(result_table);
+        dialog.show(); 
+	},
+	add_to_cart: function () {
+		var me = this;
+		var caught = false;
+		var no_of_items = me.wrapper.find(".pos-bill-item").length;
 
-	 
+		this.customer_validate();
+			//this.mandatory_batch_no(); 
+			this.qty_modal(me.items[0].item_code);
 
-	    dialog.fields_dict.qty.$wrapper.html(qtys)
-        dialog.show();
-        this.update_value();
-        var item_code = me.items[0].name
+	
+			this.validate_serial_no();
+			this.validate_warehouse();
+
 
 		if (no_of_items != 0) {
 			$.each(this.frm.doc["items"] || [], function (i, d) {

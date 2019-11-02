@@ -116,9 +116,9 @@ fixtures = [
                "Purchase Order Item-item_type",
                "Purchase Order Item-volume",
                "Sales Order Item-volume",
-               "Sales Order Item-item_type",
                "Sales Order Item-batch_expiry",
-               "Item-brand_name"
+               "Item-brand_name",
+               "Sales Order Item-batch_no"
             ]]
         ]
     },

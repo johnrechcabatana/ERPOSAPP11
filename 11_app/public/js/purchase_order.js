@@ -24,11 +24,3 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 		}
 	});
 }
-cur_frm.cscript.supplier=function(frm)
-{
-   me.frm.set_query("item_code","items", function(doc, cdt, cdn){
-            return {
-                query: "11_app.script.item.getitems"
-            };
-    });
-}

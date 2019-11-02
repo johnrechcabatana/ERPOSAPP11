@@ -1,0 +1,12 @@
+{
+	"11_app/js/custom.pos.erpnext.min.js": [ 
+		"public/js/pos/pos_custom.html",
+		"public/js/pos/pos_bill_item.html",
+		"public/js/pos/pos_bill_item_new.html",
+		"public/js/pos/pos_selected_item.html",
+		"public/js/pos/pos_custom_item.html",
+		"public/js/pos/pos_tax_row.html",
+		"public/js/pos/customer_toolbar.html",
+		"public/js/pos/pos_invoice_list.html"
+	]
+}

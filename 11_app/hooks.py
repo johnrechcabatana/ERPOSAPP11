@@ -10,12 +10,20 @@ app_icon = "octicon octicon-file-directory"
 app_color = "grey"
 app_email = "johnrech@gmail.com"
 app_license = "MIT"
-
+website_context = {
+    "favicon": '/assets/11_app/images/eph-logo-png.png',
+    "splash_image":'/assets/11_app/images/eph-logo-png.png',
+    "app_logo_url": '/assets/11_app/images/eph-logo-png.png',
+}
 # Includes in <head>
 # ------------------
 
 # include js, css files in header of desk.html 
 app_include_css = "/assets/11_app/css/ephdesk.css"
+app_include_js = [
+  "/assets/11_app/js/headerimgs.js",
+  "/assets/11_app/js/custom.pos.erpnext.min.js"
+]
 # app_include_js = "/assets/11_app/js/11_app.js"
 
 # include js, css files in header of web template

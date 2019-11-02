@@ -217,7 +217,7 @@ fixtures = [
 # Overriding Whitelisted Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "11_app.event.get_events"
-# }
+override_whitelisted_methods = {
+	"erpnext.accounts.doctype.sales_invoice.pos.get_pos_data": "11_app.script.re_get_items_list.get_pos_data"
+}
 

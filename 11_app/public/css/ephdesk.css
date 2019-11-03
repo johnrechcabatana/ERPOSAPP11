@@ -128,8 +128,11 @@ body[data-route="pos"] .pos-bill-header {
     font-weight: bold;
 }
 
+a.grey.list-id:hover > .item-list-rows {
+    background: #f5f7fa; 
+}
 a.grey.list-id:hover > .item-list-rows > div {
-    background: #f5f7fa;
+ 
     color: #333!important;
 }
 .pos-selected-item-action {
@@ -164,9 +167,9 @@ body[data-route="pos"] .item-cart-items {
     height: calc(80vh - 526px)!important;
 }
 @media (min-width: 1200px){
-	.container {
-		width: 100%;
-	}
+    .container {
+        width: 100%;
+    }
 
 }
 @media (max-width: 767px){

@@ -304,12 +304,12 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		var me = this;
 		this.doc = JSON.parse(localStorage.getItem('doc'));
 		this.meta = r.message.meta;
-		this.item_data = r.message.items;
+		this.item_data = r.message.items; 
 		this.item_groups = r.message.item_groups;
 		this.customers = r.message.customers;
 		this.serial_no_data = r.message.serial_no_data;
-		// this.batch_no_data = r.message.batch_no_data;
-		this.batch_no_data = r.message.brand_name;
+		this.batch_no_data = r.message.batch_no_data;
+		//this.batch_no_data = r.message.brand_name;
 		this.barcode_data = r.message.barcode_data;
 		this.tax_data = r.message.tax_data;
 		this.contacts = r.message.contacts;
@@ -1040,6 +1040,20 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.pos_bill.show();
 		this.numeric_keypad.show();
 	},
+	changeQty: function (){
+	$( ".pos-item-wrapper.image-view-item" ).each(function() {
+		    var qtyVar = $( this ).attr( "data-total-qty" );
+		     if(qtyVar <= 20){
+		          $( this ).css('background','rgba(249, 197, 102, 0.6)');  
+		     }
+			 if(qtyVar <= 10){
+		          $( this ).css('background','rgba(232, 85, 29, 0.72)');  
+		     }
+			 if(qtyVar <= 0){
+		          $( this ).css('background','rgba(245, 0, 0, 0.83)');  
+		     }
+		});
+	},
 
 	make_item_list: function (customer) {
 		var me = this;
@@ -1051,8 +1065,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		me.item_timeout = null;
 
 		var $wrap = me.wrapper.find(".item-list");
-		me.wrapper.find(".item-list").empty();
-		console.log(this.items);
+		me.wrapper.find(".item-list").empty(); 
 		if (this.items.length > 0) {
 			$.each(this.items, function(index, obj) {
 				let customer_price_list = me.customer_wise_price_list[customer];
@@ -1100,6 +1113,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			this.search_item.$input.val("");
 			// this.add_to_cart();
 		}
+		this.changeQty();
 	},
 
 	get_items: function (item_code) {
@@ -1139,7 +1153,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 						search_status = false;
 						return true;
 					} else if (reg.test(item.item_code.toLowerCase()) || (item.description && reg.test(item.description.toLowerCase())) ||
-						reg.test(item.item_name.toLowerCase()) || reg.test(item.item_group.toLowerCase())) {
+						reg.test(item.item_name.toLowerCase()) || reg.test(item.item_group.toLowerCase()) || reg.test(item.brand_name.toLowerCase())) {
 						return true
 					}
 				}
@@ -1239,7 +1253,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				var TotalQty = $(this).attr("data-total-qty");
 				if(TotalQty <= 0)
 				{
-					frappe.throw("Product item is insufficient. Please contact si sir,");
+					frappe.throw("Product item is insufficient. please contact your system administrator.");
 					return false;
 				}
 				me.add_to_cart();

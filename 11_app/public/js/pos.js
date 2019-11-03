@@ -1071,6 +1071,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 						item_price: item_price,
 						item_name: obj.name === obj.item_name ? "" : obj.item_name,
 						item_image: obj.image,
+						item_type: obj.item_type,
 						item_stock: me.get_actual_qty(obj),
 						item_uom: obj.stock_uom,
 						color: frappe.get_palette(obj.item_name),

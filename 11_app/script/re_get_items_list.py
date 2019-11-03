@@ -185,7 +185,7 @@ def get_items_list(pos_profile, company):
 
 	return frappe.db.sql("""
 		select
-			i.name, i.item_code, i.item_name, i.brand_name, i.volume,i.item_shelf, i.description, i.item_group, i.has_batch_no,
+			i.name, i.item_code, i.item_name, i.item_type, i.brand_name, i.volume,i.item_shelf, i.description, i.item_group, i.has_batch_no,
 			i.has_serial_no, i.is_stock_item, i.brand, i.stock_uom, i.image,
 			id.expense_account, id.selling_cost_center, id.default_warehouse,
 			i.sales_uom, c.conversion_factor
@@ -197,21 +197,6 @@ def get_items_list(pos_profile, company):
 			i.disabled = 0 and i.has_variants = 0 and i.is_sales_item = 1
 			{cond}
 		""".format(cond=cond), tuple([company] + args_list), as_dict=1)
-	# return frappe.db.sql("""
-	# 	select
-	# 		i.name, i.item_code, i.item_name, i.description, i.item_group, i.has_batch_no,
-	# 		i.has_serial_no, i.is_stock_item, i.brand, i.stock_uom, i.image,
-	# 		id.expense_account, id.selling_cost_center, id.default_warehouse,
-	# 		i.sales_uom, c.conversion_factor
-	# 	from
-	# 		`tabItem` i
-	# 	left join `tabItem Default` id on id.parent = i.name and id.company = %s
-	# 	left join `tabUOM Conversion Detail` c on i.name = c.parent and i.sales_uom = c.uom
-	# 	where
-	# 		i.disabled = 0 and i.has_variants = 0 and i.is_sales_item = 1
-	# 		{cond}
-	# 	""".format(cond=cond), tuple([company] + args_list), as_dict=1)
-
 
 def get_item_groups(pos_profile):
 	item_group_dict = {}

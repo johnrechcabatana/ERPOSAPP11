@@ -151,6 +151,8 @@ fixtures = [
                   "Purchase Order Item-uom-in_list_view",
                   "Sales Order Item-item_name-hidden",
                   "Sales Order Item-item_name-default",
+                  "Sales Order Item-amount-columns",
+                  "Sales Order Item-uom-in_list_view",
                   # "Item-default_material_request_type-hidden",
                   # "Item-hub_publishing_sb-hidden",
                   # "Item-website_section-hidden",

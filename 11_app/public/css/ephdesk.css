@@ -164,7 +164,7 @@ body[data-route="pos"] .item-list {
     border: 1px solid #0c79c7; 
 }
 body[data-route="pos"] .item-cart-items {
-    height: calc(80vh - 526px)!important;
+    height: calc(90vh - 526px)!important;
 }
 @media (min-width: 1200px){
     .container {

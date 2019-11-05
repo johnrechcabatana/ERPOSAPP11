@@ -166,6 +166,36 @@ body[data-route="pos"] .item-list {
 body[data-route="pos"] .item-cart-items {
     height: calc(90vh - 526px)!important;
 }
+.row.pos-payment-row.selected-payment-mode button.btn.btn-default.clr {
+    height: 45px;
+    width: 45px;
+}
+.list-customers-table.border-left.border-right.border-bottom {
+    background: #fff;
+}
+.list-customers-table.border-left.border-right.border-bottom {
+    background: #fff!Important;
+}
+.list-customers-table {
+    background: #fff!important;
+}
+button.btn.btn-default.list-customers-btn.view_customer {
+    background: #ff5858;
+    color: #fff;
+}
+.view_customer {
+    background: #ff5858!important;
+    color: #fff!important;
+}
+.awesomplete > ul { 
+    width: 300px!important;
+}
+.form-section-heading.uppercase span.firstspan{
+     float:left;
+}
+.form-section-heading.uppercase span.secondspan{
+    float:right;
+}
 @media (min-width: 1200px){
     .container {
         width: 100%;

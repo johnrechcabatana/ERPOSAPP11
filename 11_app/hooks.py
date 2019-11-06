@@ -138,7 +138,6 @@ fixtures = [
                   "Item-section_break_11-hidden",
                   "Purchase Order Item-item_name-in_list_view",
                   "Purchase Order Item-item_group-columns",
-                  "Purchase Order Item-description-hidden",
                   "Purchase Order Item-rate-columns",
                   "Purchase Order Item-description-default",
                   "Purchase Order Item-qty-bold",

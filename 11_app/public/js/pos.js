@@ -1166,7 +1166,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 						search_status = false;
 						return true;
 					} else if (reg.test(item.item_code.toLowerCase()) || (item.description && reg.test(item.description.toLowerCase())) ||
-							reg.test(item.item_name.toLowerCase()) || reg.test(item.item_group.toLowerCase()) || reg.test(item.brand_name.toLowerCase())) {
+							reg.test(item.item_name.toLowerCase()) || reg.test(item.item_group.toLowerCase()) || reg.test(item.brand_name)) {
 							return true
 						}
 				}

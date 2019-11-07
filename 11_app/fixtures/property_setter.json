@@ -338,5 +338,25 @@
   "property": "in_list_view",
   "property_type": "Check",
   "value": "1"
+ },
+ {
+  "_assign": null,
+  "_comments": null,
+  "_liked_by": null,
+  "_user_tags": null,
+  "default_value": null,
+  "doc_type": "Item Price",
+  "docstatus": 0,
+  "doctype": "Property Setter",
+  "doctype_or_field": "DocField",
+  "field_name": "customer",
+  "modified": "2019-11-07 08:33:29.816838",
+  "name": "Item Price-customer-in_list_view",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "property": "in_list_view",
+  "property_type": "Check",
+  "value": "1"
  }
 ]

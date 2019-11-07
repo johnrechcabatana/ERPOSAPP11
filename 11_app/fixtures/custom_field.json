@@ -202,7 +202,7 @@
   "modified": "2019-10-27 15:17:01.939668",
   "name": "Item-item_type",
   "no_copy": 0,
-  "options": "\nSyrup\nTablet\nCapsules\nTopical Medicine\nSuppositories\nDrops\nInhalers\nInjection\nImplant or patches\nSachet\nSuspension\nOphthalmic\nVial\nAmpoule",
+  "options": "\nSyrup\nTablet\nCapsules\nTopical Medicine\nSuppositories\nDrops\nInhalers\nInjection\nImplant or patches\nSachet\nSuspension\nOphthalmic\nVial\nAmpoule\nMedical Supply",
   "parent": null,
   "parentfield": null,
   "parenttype": null,

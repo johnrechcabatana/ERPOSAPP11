@@ -1456,50 +1456,58 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			frappe.throw(__("Please select customer"))
 		}
 	},
-	qty_modal:function(item_codes){
+	qty_modal:function(item_codes,doc){
 		 var me = this;
+		if(this.default_customer == this.frm.doc.customer || this.frm.doc.customer =="Senior")
+		{
+			console.log(this.frm.doc.customer);
+			console.log(this.frm.doc.owner);
+			console.log(this.default_customer);
 
+			var result_table = $(frappe.render_template('qty_custom', {
+				item_code: item_codes
+			}));
+			 let dialog = new frappe.ui.Dialog({
+		    	title: __("Quantity"),
+		    	fields: [
+		    		{
+		    			"fieldtype": "HTML",
+		    			"label": __("Quantity"),
+		    			"fieldname": "qty"
+		    		}
+		    	]
+		    });
+	 
+		    dialog.set_primary_action(__("Enter"), () => { 
 
-		var result_table = $(frappe.render_template('qty_custom', {
-			item_code: item_codes
-		}));
-		 let dialog = new frappe.ui.Dialog({
-	    	title: __("Quantity"),
-	    	fields: [
-	    		{
-	    			"fieldtype": "HTML",
-	    			"label": __("Quantity"),
-	    			"fieldname": "qty"
-	    		}
-	    	]
-	    });
- 
-	    dialog.set_primary_action(__("Enter"), () => { 
+		    	var	qtym =$('.inputmodalqty');
+		    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code");
+			        console.log(item_code+','+qtym.val());
+					me.update_qty(item_code, qtym.val());
+					me.update_value();
+					$('.modaqty').empty();
+				dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").removeAttr("id","btn-qty-enter");	
 
-	    	var	qtym =$('.inputmodalqty');
-	    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code");
-		        console.log(item_code+','+qtym.val());
-				me.update_qty(item_code, qtym.val());
-				me.update_value();
-				$('.modaqty').empty();
-			dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").removeAttr("id","btn-qty-enter");	
-
-			dialog.hide();
-	    });
- 
-	    dialog.fields_dict.qty.$wrapper.html(result_table);
-        dialog.show(); 
-        dialog.$wrapper.find('.modal-dialog').css("width", "400px");
-        dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").attr("id","btn-qty-enter");
-        dialog.$wrapper.find('.modal-dialog').on('shown.bs.modal', function() {
-		  		$('.inputmodalqty').focus();
-		})
-		dialog.$wrapper.find('.modal-dialog').find('.inputmodalqty').keydown(function (e) { 
-			  if (e.keyCode == 13) {
-			  	 dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").click(); 
-			  }
-		}); 
-
+				dialog.hide();
+		    });
+	 
+		    dialog.fields_dict.qty.$wrapper.html(result_table);
+	        dialog.show(); 
+	        dialog.$wrapper.find('.modal-dialog').css("width", "400px");
+	        dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").attr("id","btn-qty-enter");
+	        dialog.$wrapper.find('.modal-dialog').on('shown.bs.modal', function() {
+			  		$('.inputmodalqty').focus();
+			})
+			dialog.$wrapper.find('.modal-dialog').find('.inputmodalqty').keydown(function (e) { 
+				  if (e.keyCode == 13) {
+				  	 dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").click(); 
+				  }
+			}); 
+		}
+		else{
+			frappe.msgprint("Customer name is not allowed, choose "+this.default_customer+" or senior");
+			me.make_new_cart();
+		}
 	},
 	add_to_cart: function () {
 		var me = this;

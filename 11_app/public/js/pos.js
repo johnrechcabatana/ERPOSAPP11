@@ -413,19 +413,34 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.bind_numeric_keypad();
 	},
 
-	make_search: function () {
+	make_search: function (frm) {
+		var me = this;
 		frappe.ui.keys.on('enter', () => {
 			$('#btn-payout-enter').click();
-			
+			  // me.freeze_screen = true;
+			  // me.sync_sales_invoice();
+			  // me.load_data(false);
+			  // me.make_item_list();
+			  // me.set_missing_values();
 		});
 		frappe.ui.keys.on('ctrl+enter', () => {
 			$('#payit').click();
 		});
 		frappe.ui.keys.on('shift+n', () => {
 			$('#n').click();
+			  me.freeze_screen = true;
+			  me.sync_sales_invoice();
+			  me.get_data_from_server(function () {
+				me.load_data(false);
+				me.make_item_list();
+				me.set_missing_values();
+			})
 		});
 		frappe.ui.keys.on('shift+enter', () => {
 			$('#p').click();
+			 me.freeze_screen = true;
+			 me.sync_sales_invoice();
+			 this.refresh();
 		});
 		var me = this;
 		this.search_item = frappe.ui.form.make_control({
@@ -1717,12 +1732,16 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.msgprint.msg_area.find('.print_doc').on('click', function() {
 			var html = frappe.render(me.print_template_data, me.frm.doc);
 			me.print_document(html);
+			 me.sync_sales_invoice();
 		})
 
 		this.msgprint.msg_area.find('.new_doc').on('click', function() {
 			me.msgprint.hide();
 			me.make_new_cart();
+			 me.sync_sales_invoice();
 		})
+
+		
 
 	},
 

@@ -9,5 +9,5 @@ def  rate(item_code=""):
      return frappe.db.sql("""SELECT price_list_rate FROM `tabItem Price` WHERE price_list='Standard Buying' && item_code= %s""", item_code, as_dict=1);
 
 @frappe.whitelist()
-def  rate_selling(item_code, uom): 
+def  rate_selling(item_code, uom=""): 
      return frappe.db.sql("""SELECT price_list_rate,uom FROM `tabItem Price` WHERE price_list='Standard Selling' && item_code=%s && uom=%s """ ,(item_code,uom),as_dict=1);

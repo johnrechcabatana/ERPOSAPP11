@@ -10,3 +10,7 @@ def getBatch(doctype, txt, searchfield, start, page_len, filters):
 @frappe.whitelist()
 def getBatchid(batch_id=""):
 		return frappe.db.sql(""" SELECT  expiry_date FROM `tabBatch` WHERE name = %s""", batch_id, as_dict=1);
+
+@frappe.whitelist()
+def getActual_qty(item_code,warehouse):
+	return frappe.db.sql(""" SELECT actual_qty FROM `tabBin` where item_code = %s && warehouse= %s """, (item_code,warehouse), as_dict=1);

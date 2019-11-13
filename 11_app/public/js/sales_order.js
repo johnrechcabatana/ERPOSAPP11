@@ -1,10 +1,17 @@
 cur_frm.cscript.refresh=function (frm)
 {
 	cur_frm.set_df_property("item_name", "reqd",0);
+    cur_frm.set_value("set_warehouse","Distribution - P");
 }
 cur_frm.cscript.item_code=function(doc, cdt, cdn)
 {	var values= locals[cdt][cdn];
 	var stock_uom;
+
+	if(values.delivery_date == null)
+	{
+		cur_frm.clear_table("items");
+		frappe.throw("delivery date is required");
+	}
 	frappe.call({
 		method:"11_app.script.stock_entry.getitems",
 		args:{"item_code":values.item_code},
@@ -18,19 +25,6 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 		    stock_uom=r.message[0].stock_uom;
 		}
 	});
-
-	// frappe.call({
-	// 	method:"11_app.script.stock_entry.rate_selling",
-	// 	args:{"item_code":values.item_code,"uom":stock_uom},
-	// 	callback:function(r)
-	// 	{	console.log(stock_uom);
-	// 		console.log(r.message);
-	// 		// if(r.message[0].price_list_rate != null)
-	// 		// {
-	// 		// 	frappe.model.set_value(cdt, cdn, "rate", r.message[0].price_list_rate);
-	// 		// }
-	// 	}
-	// });
 
 }
 cur_frm.cscript.batch_no=function(frm, cdt, cdn)
@@ -63,4 +57,23 @@ cur_frm.cscript.uom=function(frm, cdt, cdn)
 			}
 		}
 	});
+}
+cur_frm.cscript.qty = function(doc, cdt, cdn)
+{
+	var values = locals[cdt][cdn];
+	console.log(values.qty);
+	console.log(doc.set_warehouse);
+	frappe.call({
+		method:"11_app.script.item.getActual_qty",
+		args:{"item_code":values.item_code,"warehouse":doc.set_warehouse},
+		callback:function(r)
+		{	
+			if(r.message[0].actual_qty < values.qty)
+			{
+				frappe.model.set_value(cdt, cdn,"qty",0);
+				frappe.throw("Actual Quantity is "+r.message[0].actual_qty+", reduce Quantity");
+			}
+		}
+	});
+
 }

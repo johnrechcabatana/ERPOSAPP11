@@ -196,6 +196,82 @@ button.btn.btn-default.list-customers-btn.view_customer {
 .form-section-heading.uppercase span.secondspan{
     float:right;
 }
+.static-modal.modalpos { 
+    display: none; 
+}
+.table-po {
+  width: 100%;
+  background: #fff;
+}
+.table-po > thead > tr {
+  background: #fff;
+}
+.table-po > thead > tr th {
+  padding: 15px;
+  border-bottom: 5px solid #2594e3;
+}
+ 
+.table-po > tbody > tr td {
+  border-bottom: 1px solid #333;
+  padding: 5px;
+  cursor: pointer;
+  color: #333 !important; 
+}
+.table-po > tbody > tr:hover td{
+  background: #2594e3;
+  color:#fff!important;
+}
+.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.highlight >  td{
+   background: #2594e3;
+   color:#fff!important;
+}
+.table-po tbody {
+    display:block;
+    height:50vh;
+    overflow:auto;
+}
+.table-po thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+ /* The Modal (background) */
+.modal-qty {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-qty {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.modal-qty .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-qty .close:hover,
+.modal-qty .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}  
 @media (min-width: 1200px){
     .container {
         width: 100%;

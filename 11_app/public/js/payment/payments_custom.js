@@ -19,7 +19,7 @@ erpnext.payments = erpnext.stock.StockController.extend({
 
 	select_text: function(){
 		var me = this;
-		$(this.$body).find('.form-control').click(function(){
+		$(this.$body).find('.form-control').fucos(function(){
 			$(this).select();
 		})
 	},

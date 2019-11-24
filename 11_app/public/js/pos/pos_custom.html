@@ -2,7 +2,7 @@
 <div class="pos">
 	<div class="row">
 		<div class="col-sm-6 pos-bill-wrapper">
-			<div class="col-sm-12"><h6 class="form-section-heading uppercase"><span class="firstspan">{{ __("Item Cart") }}</span> <span  class="secondspan">ShortCut Key: Select Item in cart and press del, ctrl+Enter key to Pay, shift+Enter to Print Receipt, shift+N to For New Cart</span></h6></div>
+			<div class="col-sm-12"><h6 class="form-section-heading uppercase"><span class="firstspan">{{ __("Item Cart") }}</span></h6></div>
 			<div class="pos-bill">
 				<div class="item-cart">
 					<div class="pos-list-row pos-bill-header text-muted h6">
@@ -156,7 +156,17 @@
 
 						</tr>
 				</thead>
-				<tbody class="table-app-listing item-list table-image-view-container"></tbody>
+				<tbody class="table-app-listing item-list table-image-view-container"></tbody> 
+			</table>
+			<table class="info" style="background: #fff;">
+					<tr>
+						<td>
+							<span style="background:rgb(162, 184, 124);display:inline-block;padding:5px;color:#fff;">Below QTY 20</span> <span style="background:rgb(191, 109, 60);display:inline-block;padding:5px;color:#fff;">Below QTY 10</span> <span style="background:rgb(166, 30, 34);display:inline-block;padding:5px;color:#fff;">QTY 0</span>
+						</td> 
+						<td>
+							<strong>NOTE<span style="color:red;">*</span></strong>: After payment please press <strong>SHIFT+N</strong> or <strong>Press New</strong> to make new invoice.
+						</td>
+					</tr>
 			</table>
 
 			<!-- <div class="app-listing item-list image-view-container">

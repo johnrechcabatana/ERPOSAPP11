@@ -201,7 +201,7 @@ button.btn.btn-default.list-customers-btn.view_customer {
 }
 .table-po {
   width: 100%;
-  background: #fff;
+  background: #1d8341;
 }
 .table-po > thead > tr {
   background: #fff;
@@ -215,25 +215,49 @@ button.btn.btn-default.list-customers-btn.view_customer {
   border-bottom: 1px solid #333;
   padding: 5px;
   cursor: pointer;
-  color: #333 !important; 
+  color: #fff !important; 
 }
 .table-po > tbody > tr:hover td{
-  background: #2594e3;
+  background: #193662;
   color:#fff!important;
 }
-.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.highlight >  td{
-   background: #2594e3;
-   color:#fff!important;
-}
+
 .table-po tbody {
     display:block;
     height:50vh;
     overflow:auto;
 }
+
+.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.qty-warning-orange td{ 
+     background: rgba(249, 197, 102, 0.6);
+    color:#333!important;
+}
+.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.qty-warning-red td{ 
+     background: rgb(191, 109, 60);
+    color:#fff!important;
+}
+.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.qty-warning-danger td{ 
+     background: rgb(166, 30, 34);
+    color:#fff!important;
+}
+.table-po tbody tr.tr-pos.pos-item-wrapper.image-view-item.highlight >  td{
+   background: #193662;
+   color:#fff!important;
+}
 .table-po thead, tbody tr {
     display:table;
     width:100%;
     table-layout:fixed;
+}
+.table-app-listing.item-list.table-image-view-container p {
+    color: 
+    #fff !important;
+    text-align: center;
+}
+table.info tbody tr td {
+
+    padding: 5px 0px 0 5px;
+
 }
  /* The Modal (background) */
 .modal-qty {

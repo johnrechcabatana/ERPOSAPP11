@@ -30,7 +30,7 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 	// 	callback(r){
 	// 		console.log(r.message[1].conversion_factor);
 	// 		var items = doc.fields_dict.items.grid.add_new_row();
-	// 		frappe.model.set_value(items. doctype, debit_row.name, "conversion_factor", r.message[1].conversion_factor);
+	// 		frappe.model.set_value(items.doctype, debit_row.name, "conversion_factor", r.message[1].conversion_factor);
 	// 		console.log('success');
 	// 	}
 	// });

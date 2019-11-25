@@ -1,17 +1,10 @@
 cur_frm.cscript.refresh=function (frm)
 {
 	cur_frm.set_df_property("item_name", "reqd",0);
-    cur_frm.set_value("set_warehouse","Distribution - P");
 }
 cur_frm.cscript.item_code=function(doc, cdt, cdn)
 {	var values= locals[cdt][cdn];
 	var stock_uom;
-
-	if(values.delivery_date == null)
-	{
-		cur_frm.clear_table("items");
-		frappe.throw("delivery date is required");
-	}
 	frappe.call({
 		method:"11_app.script.stock_entry.getitems",
 		args:{"item_code":values.item_code},
@@ -25,6 +18,19 @@ cur_frm.cscript.item_code=function(doc, cdt, cdn)
 		    stock_uom=r.message[0].stock_uom;
 		}
 	});
+
+	// frappe.call({
+	// 	method:"11_app.script.stock_entry.rate_selling",
+	// 	args:{"item_code":values.item_code,"uom":stock_uom},
+	// 	callback:function(r)
+	// 	{	console.log(stock_uom);
+	// 		console.log(r.message);
+	// 		// if(r.message[0].price_list_rate != null)
+	// 		// {
+	// 		// 	frappe.model.set_value(cdt, cdn, "rate", r.message[0].price_list_rate);
+	// 		// }
+	// 	}
+	// });
 
 }
 cur_frm.cscript.batch_no=function(frm, cdt, cdn)

@@ -2,7 +2,7 @@
 <div class="pos">
 	<div class="row">
 		<div class="col-sm-6 pos-bill-wrapper">
-			<div class="col-sm-12"><h6 class="form-section-heading uppercase"><span class="firstspan">{{ __("Item Cart") }}</span> <span  class="secondspan">ShortCut Key: Select Item in cart and press del, ctrl+Enter key to Pay, shift+Enter to Print Receipt, shift+N to For New Cart</span></h6></div>
+			<div class="col-sm-12"><h6 class="form-section-heading uppercase"><span class="firstspan">{{ __("Item Cart") }}</span></h6></div>
 			<div class="pos-bill">
 				<div class="item-cart">
 					<div class="pos-list-row pos-bill-header text-muted h6">
@@ -95,7 +95,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6 list-customers">
+	<div class="col-sm-12 list-customers">
 		<div class="col-sm-12"><h6 class="form-section-heading uppercase">{{ __("Customers in Queue") }}</h6></div>
 		<div class="pos-list-row pos-bill-header">
 			<div class="cell subject"><input class="list-select-all" type="checkbox">{{ __("Customer") }}</div>
@@ -111,7 +111,7 @@
 				</span>
 			</div>
 		</div>
-	</div>
+	</div> 
 	<div class="col-sm-6 pos-items-section">
 		<div class="col-sm-12"><h6 class="form-section-heading uppercase">{{ __("Stock Items") }}</h6></div>
 		<div class="row pos-item-area">
@@ -127,9 +127,9 @@
 						</ul>
 					</div>
 				</div>
-				<div class="cell search-item"></div>
+				<div id="search-item-input" class="cell search-item"></div>
 			</div>
-			<div class="row item-list-titles" style="margin-left:0px;margin-right:0px;">
+			<!-- <div class="row item-list-titles" style="margin-left:0px;margin-right:0px;">
 					<div class="col-sm-5" style="text-align:center;">
 						Product Name
 					</div>
@@ -139,17 +139,74 @@
 					<div class="col-sm-2" style="text-align:center;">
 						QTY
 					</div>
-					<!-- <div class="col-sm-2" style="text-align:center;">
+					<div class="col-sm-2" style="text-align:center;">
 						Expiry
-					</div> -->
+					</div> 
 					<div class="col-sm-2" style="text-align:center;">
 						Shelf
 					</div>
-			</div>
-			<div class="app-listing item-list image-view-container">
+			</div> -->
+			<table id="posTable" class="table-po">
+				<thead>
+						<tr>
+							<th >Product Name</th>
+							<th  style="text-align:center;width:100px;">Price</th>
+							<th  style="text-align:center;width:100px;">Qty</th>
+							<th  style="text-align:center;width:120px;">Shelf</th>
 
-			</div>
+						</tr>
+				</thead>
+				<tbody class="table-app-listing item-list table-image-view-container"></tbody> 
+			</table>
+			<table class="info" style="background: #fff;">
+					<tr>
+						<td>
+							<span style="background:rgb(162, 184, 124);display:inline-block;padding:5px;color:#fff;">Below QTY 20</span> <span style="background:rgb(191, 109, 60);display:inline-block;padding:5px;color:#fff;">Below QTY 10</span> <span style="background:rgb(166, 30, 34);display:inline-block;padding:5px;color:#fff;">QTY 0</span>
+						</td> 
+						<td>
+							<strong>NOTE<span style="color:red;">*</span></strong>: After payment please press <strong>SHIFT+N</strong> or <strong>Press New</strong> to make new invoice.
+						</td>
+					</tr>
+			</table>
+
+			<!-- <div class="app-listing item-list image-view-container">
+
+			</div> -->
+		 	
 
 		</div>
-	</div>
+	</div> 
 </div>
+ 
+ 
+<div id="PosmodalQty" class="modal" tabindex="-1" aria-hidden="false">
+	<div class="modal-backdrop fade in" style="height: 100vh;"></div>
+		<div class="modal-dialog" style="width:350px">
+			<div class="modal-content">
+				<div class="modal-header">
+	                <div class="row">
+	                    <div class="col-xs-5">
+							<span class="indicator green"></span>
+	                        <h4 class="modal-title" style="font-weight: bold;">Quantiy</h4>
+	                    </div>
+	                    <div class="col-xs-7">
+	                        <div class="text-right buttons">
+	            				<button type="button" class="btn btn-default btn-sm btn-modal-close" data-dismiss="modal">
+									<i class="octicon octicon-x visible-xs" style="padding: 1px 0px;"></i>
+									<span class="hidden-xs">Close</span></button>
+	            				<button type="button" id="btn-qty"  class="btn btn-primary btn-sm">
+	                                Submit</button>
+	                        </div>
+	                    </div>
+	                </div>
+				</div>
+				<div class="modal-body ui-front">
+				 	<div class="pos-selected-item-action modaqty" data-item-code="" data-idx="1">
+						<div class="pos-list-row"> 
+							<input type="tel"  class="form-control cell inputmodalqty" value="1" />
+						</div> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

@@ -43,6 +43,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		this.bind_events();
 		this.bind_items_event();
 		this.si_docs = this.get_doc_from_localstorage();
+
 	},
 
 	beforeunload: function (e) {
@@ -397,7 +398,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 
 	make: function () {
 		this.make_item_list();
-		this.make_discount_field()
+		this.make_discount_field(); 
 	},
 
 	make_control: function() {
@@ -442,6 +443,8 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			 me.sync_sales_invoice();
 			 this.refresh();
 		});
+	 
+
 		var me = this;
 		this.search_item = frappe.ui.form.make_control({
 			df: {
@@ -453,7 +456,32 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			parent: this.wrapper.find(".search-item"),
 			only_input: true,
 		});
-
+		$('#btn-qty').click(function(){
+			var	qtym = $('.inputmodalqty');
+		    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code"); 
+					me.update_qty(item_code, qtym.val());
+				$("#myInputID").blur(); 	
+				$('.inputmodalqty').val('1');		
+				$('#PosmodalQty').removeClass('fade'); 
+		  		$('#PosmodalQty').removeClass('in'); 
+		  		$('#PosmodalQty').css('display','none');
+	 
+				$('#search-item-input > div > input.form-control').focus();
+		});
+		$('.btn.btn-default.btn-sm.btn-modal-close').click(function(){
+			    $('.inputmodalqty').val('1');		
+				$('#PosmodalQty').removeClass('fade'); 
+		  		$('#PosmodalQty').removeClass('in'); 
+		  		$('#PosmodalQty').css('display','none'); 
+				$('#search-item-input > div > input.form-control').focus();
+		});
+		$('#PosmodalQty > .modal-backdrop.fade.in').click(function(){
+			$('.inputmodalqty').val('1');		
+			$('#PosmodalQty').removeClass('fade'); 
+		  	$('#PosmodalQty').removeClass('in'); 
+		  	$('#PosmodalQty').css('display','none'); 
+			$('#search-item-input > div > input.form-control').focus();
+		});
 		this.search_item.make_input();
 
 		this.search_item.$input.on("keypress", function (event) {
@@ -1072,13 +1100,13 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 	$( ".pos-item-wrapper.image-view-item" ).each(function() {
 		    var qtyVar = $( this ).attr( "data-total-qty" );
 		     if(qtyVar <= 20){
-		          $( this ).css('background','rgba(249, 197, 102, 0.6)');  
+		          $( this ).addClass('qty-warning-orange');  
 		     }
 			 if(qtyVar <= 10){
-		          $( this ).css('background','rgba(232, 85, 29, 0.72)');  
+		          $( this ).addClass('qty-warning-red');  
 		     }
 			 if(qtyVar <= 0){
-		          $( this ).css('background','rgba(245, 0, 0, 0.83)');  
+		          $( this ).addClass('qty-warning-danger');  
 		     }
 		});
 	},
@@ -1142,6 +1170,117 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			// this.add_to_cart();
 		}
 		this.changeQty();
+
+		$("#posTable tbody tr:first-child").addClass("highlight"); 
+		var foo = false;
+		var bar = false;
+		document.onkeydown = moveAndAdd; 
+		var x = 1;
+		function moveAndAdd(e) {
+
+		  e = e || window.event;
+
+		  if (e.keyCode == "38") {
+		  	foo = false;
+		    // up arrow
+		    activeRow = $("tr.highlight"); /* get highlighted row */
+		    activeRow.focus();
+		    
+		    // Find previous visible row
+		    var prevRow = activeRow;
+		    do {
+		      prevRow = prevRow.prev('tr'); /* very previous sibling */
+		    } while (prevRow.length !== 0 && prevRow.is(":hidden"));
+		    
+		    if (prevRow.length > 0) {
+		      activeRow.removeClass("highlight"); /*remove highlight from active class */
+		      prevRow.addClass("highlight"); /* make very prev row highlighted*/
+		    }
+		    $("tr.highlight").focus();
+		    $('#posTable').removeClass('mouseClick');
+		    $('#posTable').addClass('keyArrows');
+		  } else if (e.keyCode == "40") {
+		  	foo = false;
+		    // down arrow
+		    activeRow = $("tr.highlight"); /* get highlighted row */
+		    activeRow.focus();
+		    
+		    // Find next visible row
+		    var nextRow = activeRow;
+		    do {
+		      nextRow = nextRow.next('tr'); /* very next sibling */
+		    } while (nextRow.length !== 0 && nextRow.is(":hidden"));
+		    
+		    if (nextRow.length > 0) {
+		      activeRow.removeClass("highlight");
+		      nextRow.addClass("highlight");
+		    }
+		    $('#posTable').removeClass('mouseClick');
+		    $('#posTable').addClass('keyArrows');
+		    $("tr.highlight").focus();
+		  } else if (e.which == 13) {  
+		    if($('.inputmodalqty').is(":focus")){ 
+			 	var	qtym = $('.inputmodalqty');
+		    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code");
+			        console.log(item_code+','+qtym.val());
+					me.update_qty(item_code, qtym.val());
+				$("#myInputID").blur(); 	
+				$('.inputmodalqty').val('1');		
+				$('#PosmodalQty').removeClass('fade'); 
+		  		$('#PosmodalQty').removeClass('in'); 
+		  		$('#PosmodalQty').css('display','none');
+		  		$('#posTable').removeClass('keyArrows');
+	 	
+				$('#search-item-input > div > input.form-control').focus();
+				x = 1;	
+				return false;
+			} 
+
+			if($('.pos-payment-row[type=Cash]').find('.amount').is(":focus")){ 
+			  
+	 			$.each(me.frm.doc.payments, function (index, data) {
+				if (data.amount != 0) {
+					me.dialog.hide();
+					me.submit_invoice(); 
+					$('#search-item-input > div > input.form-control').focus();
+					x = 1;	
+					bar = false; 
+					$('.pos-payment-row[type=Cash]').find('.amount').blur();
+					return false;
+					}
+				});
+				
+				
+			}
+			if(x == 2){ 
+				$('#payit').click();
+				x++;
+				bar = true; //set to true so it wont allow to enter new item while on modal
+				return false;
+			}
+
+		   	if(!foo){
+		   		if(!bar){
+		   			if($('#posTable').hasClass('mouseClick')){return false;}
+		   			$('#posTable').addClass('keyArrows');
+		   			$("tr.highlight").click();  
+			    	$('#PosmodalQty').addClass('fade'); 
+			  		$('#PosmodalQty').addClass('in'); 
+			  		$('#PosmodalQty').css('display','block');
+			  		var item_codes = $("tr.highlight").attr('data-item-code');
+					$('.modaqty').attr('data-item-code', item_codes);
+			    	foo = true;  
+		   		} 
+	        }
+	        x++;
+
+		     console.log(x);
+		    e.preventDefault(); 
+		    
+		  }
+		}
+
+
 	},
 
 	get_items: function (item_code) {
@@ -1215,6 +1354,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			me.bind_qty_event()
 			me.update_rate()
 			$(me.wrapper).find(".selected-item").scrollTop(1000);
+			$('#.form-control.cell.pos-item-qty').focus();
 		 
 		});
 		$(this.numeric_keypad).find('.numeric-del').click();
@@ -1283,7 +1423,8 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 		})
 	},
 
-	bind_events: function() {
+	bind_events: function() { 
+
 		var me = this;
 		// if form is local then allow this function
 		// $(me.wrapper).find(".pos-item-wrapper").on("click", function () {
@@ -1302,10 +1443,25 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 				}
 				me.add_to_cart();
 				me.clear_selected_row(); 
+				$('#PosmodalQty').addClass('fade'); 
+		  		$('#PosmodalQty').addClass('in'); 
+		  		$('#PosmodalQty').css('display','block');
+				$('.modaqty').attr('data-item-code', $(this).attr("data-item-code"));
+				$('.inputmodalqty').focus();
+				$('.inputmodalqty').select();
+
+				if($('#posTable').hasClass('keyArrows')){}
+				else{
+				   $('#posTable').addClass('mouseClick'); 
+				} 
 			}
+			 // this.qty_modal($(this).attr("data-item-code")); 
+			  	
+		 
+
 		});
 
-		me.bind_delete_event()
+		me.bind_delete_event();
 	},
 
 	update_qty: function (item_code, qty, remove_zero_qty_items) {
@@ -1458,56 +1614,10 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 	},
 	qty_modal:function(item_codes,doc){
 		 var me = this;
-		if(this.default_customer == this.frm.doc.customer || this.frm.doc.customer =="Senior")
-		{
-			console.log(this.frm.doc.customer);
-			console.log(this.frm.doc.owner);
-			console.log(this.default_customer);
-
-			var result_table = $(frappe.render_template('qty_custom', {
-				item_code: item_codes
-			}));
-			 let dialog = new frappe.ui.Dialog({
-		    	title: __("Quantity"),
-		    	fields: [
-		    		{
-		    			"fieldtype": "HTML",
-		    			"label": __("Quantity"),
-		    			"fieldname": "qty"
-		    		}
-		    	]
-		    });
-	 
-		    dialog.set_primary_action(__("Enter"), () => { 
-
-		    	var	qtym =$('.inputmodalqty');
-		    	var item_code = $(qtym).parents(".modaqty").attr("data-item-code");
-			        console.log(item_code+','+qtym.val());
-					me.update_qty(item_code, qtym.val());
-					me.update_value();
-					$('.modaqty').empty();
-				dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").removeAttr("id","btn-qty-enter");	
-
-				dialog.hide();
-		    });
-	 
-		    dialog.fields_dict.qty.$wrapper.html(result_table);
-	        dialog.show(); 
-	        dialog.$wrapper.find('.modal-dialog').css("width", "400px");
-	        dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").attr("id","btn-qty-enter");
-	        dialog.$wrapper.find('.modal-dialog').on('shown.bs.modal', function() {
-			  		$('.inputmodalqty').focus();
-			})
-			dialog.$wrapper.find('.modal-dialog').find('.inputmodalqty').keydown(function (e) { 
-				  if (e.keyCode == 13) {
-				  	 dialog.$wrapper.find('.modal-dialog').find("button.btn.btn-primary.btn-sm").click(); 
-				  }
-			}); 
-		}
-		else{
-			frappe.msgprint("Customer name is not allowed, choose "+this.default_customer+" or senior");
-			me.make_new_cart();
-		}
+		$('#PosmodalQty').modal('show'); 
+		$('.modaqty').attr('data-item-code', item_codes);
+		$('.inputmodalqty').focus();
+		$('.inputmodalqty').select();
 	},
 	add_to_cart: function () {
 		var me = this;
@@ -1544,11 +1654,11 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			this.add_new_item_to_grid();
 
 		this.update_paid_amount_status(false)
-		this.wrapper.find(".item-cart-items").scrollTop(1000);
-
-
-		this.qty_modal(me.items[0].item_code);
-		$('.inputmodalqty').focus();
+		this.wrapper.find(".item-cart-items").scrollTop(1000); 
+		//this.qty_modal(me.items[0].item_code);
+		//var modal = document.getElementById("PosmodalQty");
+ 		 
+	   
 	},
 
 	add_new_item_to_grid: function () {
@@ -2242,4 +2352,8 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			frappe.throw(__("LocalStorage is full , did not save"))
 		}
 	}
-})
+});
+
+
+
+

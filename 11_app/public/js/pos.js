@@ -1354,7 +1354,7 @@ erpnext.pos.PointOfSale = erpnext.taxes_and_totals.extend({
 			me.bind_qty_event()
 			me.update_rate()
 			$(me.wrapper).find(".selected-item").scrollTop(1000);
-			$('#.form-control.cell.pos-item-qty').focus();
+			$('.form-control.cell.pos-item-qty').focus();
 		 
 		});
 		$(this.numeric_keypad).find('.numeric-del').click();

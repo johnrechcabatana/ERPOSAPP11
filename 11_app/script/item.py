@@ -14,3 +14,7 @@ def getBatchid(batch_id=""):
 @frappe.whitelist()
 def getActual_qty(item_code,warehouse):
 	return frappe.db.sql(""" SELECT actual_qty FROM `tabBin` where item_code = %s && warehouse= %s """, (item_code,warehouse), as_dict=1);
+
+@frappe.whitelist(allow_guest=True)
+def ItemSync():
+	return frappe.db.sql(""" SELECT `tabItem`.item_code, `tabItem`.description,`tabBin`.actual_qty FROM `tabItem` INNER JOIN `tabBin` """, as_dict=1);
